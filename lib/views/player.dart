@@ -47,20 +47,22 @@ class Player extends StatelessWidget {
               child: Obx(
                 () => Column(
                   children: [
-                    Text(
-                      data[controller.playIndex.value].displayNameWOExt,
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                      style: songTitleTextStyle(),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Text(
+                        data[controller.playIndex.value].displayNameWOExt,
+                        textAlign: TextAlign.center,
+                        style: songTitleTextStyle(),
+                      ),
                     ),
                     const SizedBox(height: 10),
-                    Text(
-                      data[controller.playIndex.value].artist.toString(),
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                      style: songTitleTextStyle(),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Text(
+                        data[controller.playIndex.value].artist.toString(),
+                        textAlign: TextAlign.center,
+                        style: songTitleTextStyle(),
+                      ),
                     ),
                     const SizedBox(height: 10),
                     // Slider-------------------------------------------------

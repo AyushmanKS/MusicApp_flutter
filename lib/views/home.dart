@@ -72,10 +72,12 @@ class Home extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18),
                         ),
-                        title: Text(
-                          snapshot.data![index].displayNameWOExt,
-                          style: songTitleTextStyle(),
-                          overflow: TextOverflow.ellipsis,
+                        title: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Text(
+                            snapshot.data![index].displayNameWOExt,
+                            style: songTitleTextStyle(),
+                          ),
                         ),
                         subtitle: Text("${snapshot.data![index].artist}",
                             style: const TextStyle(color: Colors.white)),
