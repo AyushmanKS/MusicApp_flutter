@@ -82,6 +82,7 @@ class Home extends StatelessWidget {
                           nullArtworkWidget: const Icon(
                             Icons.music_note,
                             color: Colors.white,
+                            size: 52,
                           ),
                         ),
                         trailing: controller.playIndex.value == index &&
