@@ -9,6 +9,8 @@ class PlayerController extends GetxController {
 
   var playIndex = 0.obs;
   var isPlaying = false.obs;
+  var duration = ''.obs;
+  var position = ''.obs;
 
   // making sure usrs has given permission
   @override
@@ -17,12 +19,24 @@ class PlayerController extends GetxController {
     checkPermission();
   }
 
+  // update the position
+  updatePosition() {
+    audioPlayer.durationStream.listen((d) {
+      duration.value = d.toString().split('.')[0];
+    });
+    audioPlayer.positionStream.listen((p) {
+      position.value = p.toString().split('.')[0];
+    });
+  }
+
+  // playsong function
   playSong(String? uri, index) {
     playIndex.value = index;
     try {
       audioPlayer.setAudioSource(AudioSource.uri(Uri.parse(uri!)));
       audioPlayer.play();
       isPlaying(true);
+      updatePosition();
     } on Exception catch (e) {
       print(e.toString());
     }

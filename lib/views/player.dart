@@ -53,13 +53,18 @@ class Player extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   // Slider-------------------------------------------------
-                  Row(
-                    children: [
-                      Text('0:00', style: songTitleTextStyle()),
-                      Expanded(
-                          child: Slider(value: 0.0, onChanged: (newValue) {})),
-                      Text('2:56', style: songTitleTextStyle()),
-                    ],
+                  Obx(
+                    () => Row(
+                      children: [
+                        Text(controller.position.value,
+                            style: songTitleTextStyle()),
+                        Expanded(
+                            child:
+                                Slider(value: 0.0, onChanged: (newValue) {})),
+                        Text(controller.duration.value,
+                            style: songTitleTextStyle()),
+                      ],
+                    ),
                   ),
 
                   const SizedBox(height: 10),
@@ -67,6 +72,7 @@ class Player extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
+                      // SkipPrev
                       IconButton(
                         onPressed: () {},
                         icon: const Icon(
@@ -75,6 +81,7 @@ class Player extends StatelessWidget {
                           size: 36,
                         ),
                       ),
+                      // Pause/Play
                       Obx(
                         () => CircleAvatar(
                           radius: 35,
@@ -103,6 +110,7 @@ class Player extends StatelessWidget {
                                     )),
                         ),
                       ),
+                      // SkipNext
                       IconButton(
                         onPressed: () {},
                         icon: const Icon(
