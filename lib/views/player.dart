@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:musicapp_flutter/consts/text_style.dart';
+import 'package:musicapp_flutter/controllers/player_controller.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 
 class Player extends StatelessWidget {
-  const Player({super.key});
+  final SongModel data;
+
+  const Player({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.find<PlayerController>();
+
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(),
@@ -15,11 +22,16 @@ class Player extends StatelessWidget {
           children: [
             Expanded(
                 child: Container(
-              decoration: const BoxDecoration(
-                  shape: BoxShape.circle, color: Colors.red),
-              alignment: Alignment.center,
-              child: Icon(Icons.music_note),
-            )),
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle, color: Colors.red),
+                    alignment: Alignment.center,
+                    child: QueryArtworkWidget(
+                      id: data.id,
+                      type: ArtworkType.AUDIO,
+                      artworkHeight: double.infinity,
+                      artworkWidth: double.infinity,
+                    ))),
             const SizedBox(height: 10),
             Expanded(
                 child: Container(
@@ -31,12 +43,12 @@ class Player extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    'Music name',
+                    data.displayNameWOExt,
                     style: songTitleTextStyle(),
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    'Artist name',
+                    data.artist.toString(),
                     style: songTitleTextStyle(),
                   ),
                   const SizedBox(height: 10),
@@ -57,23 +69,43 @@ class Player extends StatelessWidget {
                     children: [
                       IconButton(
                         onPressed: () {},
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.skip_previous_rounded,
                           color: Colors.white,
                           size: 36,
                         ),
                       ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.play_arrow,
-                          color: Colors.white,
-                          size: 36,
+                      Obx(
+                        () => CircleAvatar(
+                          radius: 35,
+                          backgroundColor:
+                              const Color.fromARGB(255, 49, 36, 36),
+                          child: IconButton(
+                              onPressed: () {
+                                if (controller.isPlaying.value) {
+                                  controller.audioPlayer.pause();
+                                  controller.isPlaying(false);
+                                } else {
+                                  controller.audioPlayer.play();
+                                  controller.isPlaying(true);
+                                }
+                              },
+                              icon: controller.isPlaying.value
+                                  ? const Icon(
+                                      Icons.pause,
+                                      color: Colors.white,
+                                      size: 36,
+                                    )
+                                  : const Icon(
+                                      Icons.play_arrow,
+                                      color: Colors.white,
+                                      size: 36,
+                                    )),
                         ),
                       ),
                       IconButton(
                         onPressed: () {},
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.skip_next_rounded,
                           color: Colors.white,
                           size: 36,

@@ -89,8 +89,11 @@ class Home extends StatelessWidget {
                             ? const Icon(Icons.play_arrow, color: Colors.white)
                             : null,
                         onTap: () {
-                          Get.to(() => const Player());
-                          //controller.playSong(snapshot.data![index].uri, index);
+                          Get.to(() => Player(
+                                data: snapshot.data![index],
+                              ));
+                          // this stement responsible for playing song
+                          controller.playSong(snapshot.data![index].uri, index);
                         },
                       ),
                     ),
