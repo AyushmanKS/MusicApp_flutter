@@ -59,8 +59,17 @@ class Player extends StatelessWidget {
                         Text(controller.position.value,
                             style: songTitleTextStyle()),
                         Expanded(
-                            child:
-                                Slider(value: 0.0, onChanged: (newValue) {})),
+                            child: Slider(
+                                min: const Duration(seconds: 0)
+                                    .inSeconds
+                                    .toDouble(),
+                                max: controller.max.value,
+                                value: controller.value.value,
+                                onChanged: (newValue) {
+                                  controller.changeDurationToSeconds(
+                                      newValue.toInt());
+                                  newValue = newValue;
+                                })),
                         Text(controller.duration.value,
                             style: songTitleTextStyle()),
                       ],
