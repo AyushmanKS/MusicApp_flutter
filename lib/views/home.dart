@@ -72,8 +72,11 @@ class Home extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18),
                         ),
-                        title: Text(snapshot.data![index].displayNameWOExt,
-                            style: songTitleTextStyle()),
+                        title: Text(
+                          snapshot.data![index].displayNameWOExt,
+                          style: songTitleTextStyle(),
+                          overflow: TextOverflow.ellipsis,
+                        ),
                         subtitle: Text("${snapshot.data![index].artist}",
                             style: const TextStyle(color: Colors.white)),
                         leading: QueryArtworkWidget(
