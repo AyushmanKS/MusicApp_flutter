@@ -90,7 +90,7 @@ class Home extends StatelessWidget {
                             : null,
                         onTap: () {
                           Get.to(() => Player(
-                                data: snapshot.data![index],
+                                data: snapshot.data!,
                               ));
                           // this stement responsible for playing song
                           controller.playSong(snapshot.data![index].uri, index);
