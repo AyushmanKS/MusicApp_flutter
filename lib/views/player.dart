@@ -101,7 +101,8 @@ class Player extends StatelessWidget {
                               controller.playSong(
                                   data[controller.playIndex.value - 1].uri,
                                   controller.playIndex.value - 1);
-                            } else {
+                            } else if (controller.playIndex.value == 0) {
+                              Get.snackbar('Reached first song', '');
                               // Optional: Handle what to do when trying to go back from the first song.
                             }
                           },
@@ -147,7 +148,9 @@ class Player extends StatelessWidget {
                               controller.playSong(
                                   data[controller.playIndex.value + 1].uri,
                                   controller.playIndex.value + 1);
-                            } else {
+                            } else if (controller.playIndex.value ==
+                                data.length - 1) {
+                              Get.snackbar('Reached last song', '');
                               // Optional: Handle what to do when trying to go forward from the last song.
                             }
                           },
